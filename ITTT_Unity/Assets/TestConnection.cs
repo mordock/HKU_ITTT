@@ -10,25 +10,41 @@ public class TestConnection : MonoBehaviour
     private float timeValue;
     private float waitTime = 2;
 
-    int value = 0;
+    float value = 0;
+    private GameObject player;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         stream.Open();
+        stream.ReadTimeout = 5;
 
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        timeValue += Time.deltaTime;
+    void Update() {
+        try {
+            value = float.Parse(stream.ReadLine());
+        } catch (System.Exception) {
 
-        if (timeValue > waitTime) {
-            timeValue = 0;
-            stream.Write(value.ToString());
-
-            value++;
-            Debug.Log("HIT");
         }
+
+        if (value > 0) {
+            player.GetComponent<Jumping>().Jump(value);
+            value = 0;
+        }
+        Debug.Log("MIEP: " + value);
+        //timeValue += Time.deltaTime;
+
+        //if (timeValue > waitTime) {
+        //    timeValue = 0;
+        //    stream.Write(value.ToString());
+
+        //    value++;
+        //    Debug.Log("HIT");
+        //}
+    }
+
+    public void SendValueToArduino(string valueToSend) {
+        stream.Write(valueToSend);
     }
 }

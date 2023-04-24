@@ -80,7 +80,6 @@ public class Spawners : MonoBehaviour
 
     private void SetRandomSpawnTimer() {
         randomCurrentSpawnTime = Random.Range(randomSpawnTimers.x, randomSpawnTimers.y);
-        Debug.Log(randomCurrentSpawnTime);
     }
 
     private void SetEscalteSpawnTimer() {
@@ -88,7 +87,6 @@ public class Spawners : MonoBehaviour
     }
 
     private void EscalateReduceSpawnTimer() {
-        Debug.Log("called");
         escalateCurrentSpawnTime -= escalteIncramentValue;
         Debug.Log(escalateCurrentSpawnTime);
         escalateTotalTime--;

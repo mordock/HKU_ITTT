@@ -51,6 +51,18 @@ public class Jumping : MonoBehaviour
         }
     }
 
+    public void Jump(float buttonTime) {
+        if (!jumping) {
+            if (buttonTime <= 250) {
+                jumping = true;
+                GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForceShort, 0), ForceMode.Impulse);
+            } else {
+                jumping = true;
+                GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForceLong, 0), ForceMode.Impulse);
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag.Equals("Ground")) {
             jumping = false;

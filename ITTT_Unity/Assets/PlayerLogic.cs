@@ -12,8 +12,11 @@ public class PlayerLogic : MonoBehaviour
 
     private bool invincible;
     private float currentInvincibleTime;
+
+    private TestConnection connection;
     // Start is called before the first frame update
     void Start() {
+        connection = GameObject.Find("GameManager").GetComponent<TestConnection>();
     }
 
     // Update is called once per frame
@@ -29,13 +32,16 @@ public class PlayerLogic : MonoBehaviour
         }
 
         if(health <= 0) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            connection.SendValueToArduino(health.ToString());
+            Debug.Log("YOU suck");
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.transform.tag.Equals("Obstacle")) {
             if (!invincible) {
+                connection.SendValueToArduino(health.ToString());
                 health--;
                 invincible = true;
             }
