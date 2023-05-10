@@ -64,32 +64,30 @@ void loop() {
   }
 
   //calculate difference
-  if(calculateDifferenceButton){
+  if (calculateDifferenceButton) {
     calculateDifferenceButton = false;
 
     buttonPressedTime = endButtonTime - startButtonTime;
     Serial.println(buttonPressedTime);
   }
 
-  // Serial.print("Time: ");
-  // myTime = millis();
-
-  // Serial.println(myTime); // prints time since program started
-  // delay(1000);
-
   String unity = Serial.readString();
   int value = unity.toInt();
 
   //lost one hp
-  if(value == 3){
+  if (value == 3) {
     threeHP = false;
     twoHP = true;
-  } else if(value == 2){
+  } else if (value == 2) {
     //lost 2 hp
     twoHP = false;
     oneHP = true;
-  } else if(value == 1){
+  } else if (value == 1) {
     // lost game
+    oneHP = false;
+    delay(1000);
+    threeHP = true;
+    twoHP = false;
     oneHP = false;
   }
 }

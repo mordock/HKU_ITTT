@@ -33,8 +33,9 @@ public class PlayerLogic : MonoBehaviour
 
         if(health <= 0) {
             connection.SendValueToArduino(health.ToString());
-            Debug.Log("YOU suck");
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            connection.CloseStream();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
         }
     }
 

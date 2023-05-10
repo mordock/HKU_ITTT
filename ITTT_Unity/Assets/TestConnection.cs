@@ -32,7 +32,6 @@ public class TestConnection : MonoBehaviour
             player.GetComponent<Jumping>().Jump(value);
             value = 0;
         }
-        Debug.Log("MIEP: " + value);
         //timeValue += Time.deltaTime;
 
         //if (timeValue > waitTime) {
@@ -46,5 +45,9 @@ public class TestConnection : MonoBehaviour
 
     public void SendValueToArduino(string valueToSend) {
         stream.Write(valueToSend);
+    }
+
+    public void CloseStream() {
+        stream.Close();
     }
 }
