@@ -7,9 +7,6 @@ public class TestConnection : MonoBehaviour
 {
     SerialPort stream = new SerialPort("COM3", 9600);
 
-    private float timeValue;
-    private float waitTime = 2;
-
     float value = 0;
     private GameObject player;
     // Start is called before the first frame update
@@ -32,15 +29,6 @@ public class TestConnection : MonoBehaviour
             player.GetComponent<Jumping>().Jump(value);
             value = 0;
         }
-        //timeValue += Time.deltaTime;
-
-        //if (timeValue > waitTime) {
-        //    timeValue = 0;
-        //    stream.Write(value.ToString());
-
-        //    value++;
-        //    Debug.Log("HIT");
-        //}
     }
 
     public void SendValueToArduino(string valueToSend) {
